@@ -2,12 +2,15 @@ import pytest
 from app.main import check_password
 
 
-@pytest.mark.parametrize("password, valid",
-                         [
-                             ("Pass@word1", True),
-                             ("qwerty", False),
-                             ("qwertyuiopasdfghjkl", False),
-                             ("asdqwd", False)
-                         ])
-def test_our_funk(password: str, valid: bool) -> None:
-    assert check_password(password) == valid
+@pytest.mark.parametrize(
+    "password, expected",
+    [
+        ("Sho1rt!", False),
+        ("rr1Wetwtwr", False),
+        ("Message1istoo@long", False),
+        ("dfgdfggdQ!$@", False),
+        ("dfsfs1g#sfsg", False)
+    ]
+)
+def test_check_password(password: str, expected: bool) -> None:
+    assert check_password(password) == expected
